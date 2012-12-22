@@ -3,6 +3,8 @@ var urls = JSON.parse(localStorage['urls']);
 for(var i = 0; i < urls.length; i++){
 	var newDt = document.createElement("dt");
 	newDt.innerHTML = "<a href=" + urls[i].url + ">" + urls[i].title + "</a>";
+  newDt.innerHTML += "<input type='button' onclick=deleteObj(urls[i]) value='削除' >"
+
 	var newDd = document.createElement("dd");
 	newDd.innerHTML =  "<p class=\"url\">" + urls[i].url + "</p>";
 	newDd.innerHTML += "<p class=\"date\">" + urls[i].date + "</p>";
@@ -10,3 +12,8 @@ for(var i = 0; i < urls.length; i++){
 	entries.appendChild(newDt);
 	entries.appendChild(newDd);	 
 }
+
+function deleteObj(url){
+  delete url
+}
+
