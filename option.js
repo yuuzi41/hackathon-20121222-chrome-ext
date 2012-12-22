@@ -3,7 +3,7 @@ var urls = JSON.parse(localStorage['urls']);
 for(var i = 0; i < urls.length; i++){
 	var newDt = document.createElement("dt");
 	newDt.innerHTML = "<a href=" + urls[i].url + ">" + urls[i].title + "</a>";
-	newDt.innerHTML += "<input type='button' id='" + i + "' value='削除' >";
+	newDt.innerHTML += "<input type='button' id='" + i + "' value='しょうもなくない' >";
 
 	var newDd = document.createElement("dd");
 	newDd.innerHTML =  "<p class=\"url\">" + urls[i].url + "</p>";
@@ -13,7 +13,7 @@ for(var i = 0; i < urls.length; i++){
 	entries.appendChild(newDd);
 
 	document.getElementById(i).onclick = function(){
-		ret = confirm("\"" + urls[this.id].title + "\" を削除します．宜しいですか？");
+		ret = confirm("\"" + urls[this.id].title + "\" を削除しちゃうけど，いい？");
 		if(ret == true){
 			urls.splice(this.id,1);
 			localStorage['urls'] = JSON.stringify(urls);
