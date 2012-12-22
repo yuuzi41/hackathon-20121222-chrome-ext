@@ -12,6 +12,8 @@ chrome.browserAction.onClicked.addListener(function() {
     //alert(tab.url);
     localStorage['urls'] = JSON.stringify(urls);
 
+    chrome.browserAction.setBadgeText({text:selected(tab.url)});
+
     httpSend(tab.title, tab.url);
   });
 
@@ -23,7 +25,7 @@ chrome.browserAction.onClicked.addListener(function() {
   var rand = ary[Math.floor(Math.random() * ary.length)];
   console.log(rand);
   rand.play();
-  
+
 });
 
 function httpSend(title, url){
@@ -32,5 +34,15 @@ function httpSend(title, url){
     xmlHttp.send(null);
 }
 
+// chrome.browserAction.setBadgeText({text:"1"});
 
-chrome.browserAction.setBadgeText({text:"100"});
+function selected(url){
+  var urls = JSON.parse(localStorage['urls']);
+  for(var i = 0; i < urls.length; i++){
+    if (urls[i].url == url) {
+      return '1';
+    } else {
+      return '0';
+    }
+  }
+}
