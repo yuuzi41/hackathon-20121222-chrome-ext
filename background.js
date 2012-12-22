@@ -12,9 +12,11 @@ chrome.browserAction.onClicked.addListener(function() {
     //alert(tab.url);
     localStorage['urls'] = JSON.stringify(urls);
 
-    chrome.browserAction.setBadgeText({text:selected(tab.url)});
-
     httpSend(tab.title, tab.url);
+
+    setTimeout(function () {
+      httpSendCnt(tab.url);
+    }, 100);
   });
 
   var audioFX1 = new Audio("./audio/robot_child.wav");
@@ -31,6 +33,18 @@ chrome.extension.onMessage.addListener(function(request,sender,sendResponse) {
   chrome.browserAction.setBadgeText({text: (''+request.ccnt)});
   sendResponse({farewell: "goodbye"});
 });
+
+var httpSendCnt = function (url){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function( ) {
+      if ( xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        var obj = JSON.parse(xmlHttp.responseText);
+        chrome.browserAction.setBadgeText({text: (''+obj.count)});
+      }
+    }
+    xmlHttp.open("GET", "http://shomo.herokuapp.com/api/cnt?url=" + url, true);
+    xmlHttp.send(null);
+}
 
 function httpSend(title, url){
     var xmlHttp = new XMLHttpRequest();
