@@ -8,10 +8,18 @@
 <input type="button" value="再生" onClick="playSound()">
 
 <script type="text/javascript">
-var audioFX1 = new Audio("./shoumoneeeee.m4a");
+
+var audioFX1 = new Audio("./audio/robot_child.wav");
+var audioFX2 = new Audio("./audio/yukkuri.wav");
+var audioFX3 = new Audio("./audio/saykana.m4a");
+var audioFX4 = new Audio("./audio/woman_hanagoe.wav");
+
+var ary = [audioFX1,audioFX2,audioFX3]
 
 function playSound() {
-	audioFX1.play();
+  var rand = ary[Math.floor(Math.random() * ary.length)];
+  console.log(rand);
+  rand.play();
 }
 </script>
 

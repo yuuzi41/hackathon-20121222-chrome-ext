@@ -15,9 +15,15 @@ chrome.browserAction.onClicked.addListener(function() {
     httpSend(tab.title, tab.url);
   });
 
-  var audioFX1 = new Audio("./shoumoneeeee.m4a");
-  audioFX1.play();
-
+  var audioFX1 = new Audio("./audio/robot_child.wav");
+  var audioFX2 = new Audio("./audio/yukkuri.wav");
+  var audioFX3 = new Audio("./audio/saykana.m4a");
+  var audioFX4 = new Audio("./audio/woman_hanagoe.wav");
+  var ary = [audioFX1,audioFX2,audioFX3]
+  var rand = ary[Math.floor(Math.random() * ary.length)];
+  console.log(rand);
+  rand.play();
+  
 });
 
 function httpSend(title, url){
