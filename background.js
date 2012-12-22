@@ -12,13 +12,19 @@ chrome.browserAction.onClicked.addListener(function() {
     //alert(tab.url);
     localStorage['urls'] = JSON.stringify(urls);
 
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "http://~.herokuapp.com/api/add?url=" + tab.url + "&title=" + tab.title);
-    xmlHttp.send(null);
+    httpSend(tab.title, tab.url);
   });
 
   var audioFX1 = new Audio("./shoumoneeeee.m4a");
   audioFX1.play();
+
 });
+
+function httpSend(title, url){
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "http://~.herokuapp.com/api/add?title=" + title + "&url=" + url);
+    xmlHttp.send(null);
+}
+
 
 chrome.browserAction.setBadgeText({text:"100"});
