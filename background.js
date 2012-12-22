@@ -25,12 +25,16 @@ chrome.browserAction.onClicked.addListener(function() {
   var rand = ary[Math.floor(Math.random() * ary.length)];
   console.log(rand);
   rand.play();
+});
 
+chrome.extension.onMessage.addListener(function(request,sender,sendResponse) {
+  chrome.browserAction.setBadgeText({text: (''+request.ccnt)});
+  sendResponse({farewell: "goodbye"});
 });
 
 function httpSend(title, url){
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", "http://~.herokuapp.com/api/add?title=" + title + "&url=" + url);
+    xmlHttp.open("GET", "http://shomo.herokuapp.com/api/add?title=" + title + "&url=" + url);
     xmlHttp.send(null);
 }
 
@@ -41,8 +45,7 @@ function selected(url){
   for(var i = 0; i < urls.length; i++){
     if (urls[i].url == url) {
       return '1';
-    } else {
-      return '0';
     }
   }
+  return '0';
 }
