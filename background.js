@@ -17,6 +17,10 @@ chrome.browserAction.onClicked.addListener(function() {
       urls.push({title: tab.title, url: tab.url, date: new Date()});
       alert(tab.url);
       localStorage['urls'] = JSON.stringify(urls);
+
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open("GET", "http://~.herokuapp.com/api/add?url=" + tab.url + "&title=" + tab.title);
+    xmlHttp.send(null);
   });
 
   // console.log(localStorage['urls']);
